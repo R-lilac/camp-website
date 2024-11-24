@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <title>p5.js</title>
+  <style>
+    body {
+      margin: 0; /* 余白を完全に削除 */
+    }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/p5@1.11.1/lib/p5.min.js"></script>
+</head>
+<body>
+
+<script>
+let r = 60;
+let rr;
+let rx;
+
+function setup() {
+  // put setup code here
+  //let size = windowHeight > windowWidth ? windowHeight : windowWidth;
+
+  createCanvas(windowWidth, windowHeight);
+  angleMode(DEGREES);
+  noFill();
+  background("#7B90D2");
+  stroke("255");
+
+  //background(255);
+  rr = r / 2 / cos(30);
+  rx = sin(60) * r * 2;
+}
+
+function draw() {
+  // put drawing code here
+  /*let centerx = width/2;
+   let centery = height/2;
+   drawPoly(centerx, centery);
+   */
+
+  for (let j = 0; j < height; j = j + r) {
+    for (let i = 0; i < width + rx; i = i + rx) {
+      drawPoly(i, j);
+    }
+  }
+}
+
+function drawPoly(x, y) {
+  let center = [0, 0];
+  let outline = [];
+  let inline = [];
+
+  push();
+  translate(x, y);
+
+  for (let i = 0; i < 6; i++) {
+    outline[i] = [r * sin((360 * i) / 6), r * cos((360 * i) / 6)];
+
+    inline[i] = [rr * sin((360 * i) / 6 + 30), rr * cos((360 * i) / 6 + 30)];
+  }
+
+  beginShape();
+  for (let i = 0; i < 6; i++) {
+    vertex(outline[i][0], outline[i][1]);
+  }
+  endShape(CLOSE);
+
+  for (let i = 0; i < 6; i++) {
+    line(center[0], center[1], outline[i][0], outline[i][1]);
+
+    line(inline[i][0], inline[i][1], 0, 0);
+    line(inline[i][0], inline[i][1], outline[i][0], outline[i][1]);
+    let ii = i + 1;
+    if (i == 5) ii = 0;
+    line(inline[i][0], inline[i][1], outline[ii][0], outline[ii][1]);
+  }
+
+  pop();
+}
+
+</script>
+
+</body>
+</html>
