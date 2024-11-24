@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <title>p5.js</title>
+  <style>
+    body {
+      margin: 0; /* 余白を完全に削除 */
+    }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/p5@1.11.1/lib/p5.min.js"></script>
+</head>
+<body>
+
+<script>
+let size = 20;
+let n = 5;
+let a = 360 / n;
+
+function setup() {
+  // put setup code here
+  createCanvas(windowWidth, windowHeight);
+  angleMode(DEGREES);
+}
+
+function draw() {
+  // put drawing code here
+  background("#252b3a11");
+  // background("#00000011");
+  // background("#252b3a");
+  // background("#252b3a");
+
+  for (let j = 0; j < height; j = j + size * 3) {
+    for (let i = 0; i < width + size; i = i + size * 3) {
+      if (j % (size * 3 * 2)) {
+        ume(i + size * 1.5, j);
+        if (i % (size * 3 * 2) == j % (size * 3 * 2)) {
+          ninjin2(i + size * 1.5, j);
+        }
+      } else {
+        ume(i, j);
+
+        //if(i /(size*3) == 2 + j /(size*3)){
+        if (i % (size * 3 * 3) == j % (size * 3 * 3)) {
+          ninjin(i, j);
+        }
+        if (i % (size * 2 * 2) == j % (size * 2 * 2)) {
+          ninjin3(i, j);
+        }
+      }
+    }
+  }
+}
+
+function ume(x, y) {
+  push();
+  translate(x, y);
+  rotate(-90);
+
+  noFill();
+  stroke("#dea37a");
+  strokeWeight(2);
+  for (let i = 0; i < n; i++) {
+    arc(
+      (cos(a * i) * size) / 2,
+      (sin(a * i) * size) / 2,
+      size,
+      size,
+      -180 + a * i,
+      70 + a * i
+    );
+
+    arc(
+      (cos(a * i + a / 2) * size) / 2,
+      (sin(a * i + a / 2) * size) / 2,
+      size,
+      size,
+      -180 + (a * i + a / 2),
+      -120 + (a * i + a / 2)
+    );
+  }
+
+  fill(255);
+  circle(0, 0, size / 4);
+
+  pop();
+}
+
+function ninjin(x, y) {
+  push();
+  translate(x, y);
+  rotate(-90);
+
+  noStroke();
+  fill("#a60624");
+  for (let i = 0; i < n; i++) {
+    circle((cos(a * i) * size) / 2, (sin(a * i) * size) / 2, size);
+  }
+
+  drawingContext.shadowBlur = size;
+  drawingContext.shadowColor = "#a58799";
+  circle(0, 0, (size / 3) * 2);
+
+  noFill();
+  stroke("#fdeaa2");
+  strokeWeight(1);
+  for (let i = 0; i < n; i++) {
+    arc(
+      (cos(a * i) * size) / 2,
+      (sin(a * i) * size) / 2,
+      size,
+      size,
+      -180 + a * i,
+      70 + a * i
+    );
+  }
+
+  pop();
+}
+
+function ninjin2(x, y) {
+  push();
+  translate(x, y);
+  rotate(-90);
+
+  noStroke();
+  fill("#e7c8c0");
+  for (let i = 0; i < n; i++) {
+    circle((cos(a * i) * size) / 2, (sin(a * i) * size) / 2, size);
+  }
+
+  drawingContext.shadowBlur = size;
+  drawingContext.shadowColor = "#bda5b4";
+  circle(0, 0, (size / 3) * 2);
+
+  noFill();
+  stroke("#fff");
+  strokeWeight(1);
+  for (let i = 0; i < n; i++) {
+    arc(
+      (cos(a * i) * size) / 2,
+      (sin(a * i) * size) / 2,
+      size,
+      size,
+      -180 + a * i,
+      70 + a * i
+    );
+  }
+
+  pop();
+}
+
+function ninjin3(x, y) {
+  push();
+  translate(x, y);
+  rotate(-90);
+
+  noStroke();
+  fill("#fff");
+  for (let i = 0; i < n; i++) {
+    circle((cos(a * i) * size) / 2, (sin(a * i) * size) / 2, size);
+  }
+
+  drawingContext.shadowBlur = size;
+  drawingContext.shadowColor = "#000";
+  circle(0, 0, (size / 3) * 2);
+
+  noFill();
+  stroke("#fff");
+  strokeWeight(1);
+  for (let i = 0; i < n; i++) {
+    arc(
+      (cos(a * i) * size) / 2,
+      (sin(a * i) * size) / 2,
+      size,
+      size,
+      -180 + a * i,
+      70 + a * i
+    );
+  }
+
+  pop();
+}
+
+</script>
+
+</body>
+</html>
